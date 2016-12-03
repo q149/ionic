@@ -1,5 +1,29 @@
 <ion-view view-title="Contact Us">
   <ion-content>
-    <h1>Contact Us</h1>
+    <div class="card">
+      <div class="item item-divider">
+        Location Information
+      </div>
+      <div class="item item-text-wrap">
+        <h3>Our Address</h3>
+        <address>
+          <p>121, Clear Water Bay Road</p>
+          <p>Clear Water Bay, Kowloon</p>
+          <p>HONG KONG</p>
+          <p><i class="icon ion-ios-telephone">: +852 1234 5678</i></p>
+          <p><i class="icon ion-ios-printer">: +852 8765 4321</i></p>
+          <p><i class="icon ion-ios-email">: confusion@food.net</i></p>
+        </address>
+        <h2>{{dish.name}}
+          <span style="font-size:75%">{{dish.price | currency}}</span>
+          <span class="badge badge-assertive">{{dish.label}}</span></h2>
+        <p>{{dish.description}}</p>
+      </div>
+      <div class="button-bar">
+        <a class="button icon-left ion-ios-telephone button-positive">Call</a>
+        <a class="button icon-left ion-social-skype button-calm">Skype</a>
+        <a class="button icon-left ion-ios-email button-balanced">Email</a>
+      </div>
+    </div>
   </ion-content>
 </ion-view>
