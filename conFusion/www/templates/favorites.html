@@ -7,7 +7,8 @@
   </ion-nav-buttons>
   <ion-content>
     <ion-list show-delete="shouldShowDelete">
-      <ion-item ng-repeat="dish in dishes | favoriteFilter:favorites" href="#/app/menu/{{dish.id}}" class="item-thumbnail-left" on-swipe-left="deleteFavorite(dish.id)">
+      <ion-item ng-repeat="dish in dishes | favoriteFilter:favorites" href="#/app/menu/{{dish.id}}" class="item-thumbnail-left" on-swipe-left="deleteFavorite(dish.id)"
+        on-swipe-left="deleteFavorite(dish.id)" >
         <img ng-src="{{baseURL+dish.image}}">
         <h2>{{dish.name}}
           <span style="font-size:75%">{{dish.price | currency}}</span>
