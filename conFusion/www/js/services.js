@@ -2,6 +2,7 @@
 
 angular.module('conFusion.services', ['ngResource'])
         .constant("baseURL","http://192.168.1.16:3000/")
+        //.constant("baseURL","http://localhost:3000/")
         .factory('menuFactory', ['$resource', 'baseURL', function($resource,baseURL) {
 
           return $resource(baseURL + "dishes/:id", null, {'update':{method:'PUT' }});
@@ -18,15 +19,12 @@ angular.module('conFusion.services', ['ngResource'])
         }])
 
         .factory('feedbackFactory', ['$resource', 'baseURL', function($resource,baseURL) {
-
-
             return $resource(baseURL+"feedback/:id");
-
         }])
 
-        .factory('favoriteFactory', ['$resource', 'baseURL', function($resource, baseURL) {
+        .factory('favoriteFactory', ['$resource', 'baseURL', '$localStorage', function($resource, baseURL, $localStorage) {
             var favFac = {};
-            var favorites = [];
+            var favorites = $localStorage.getObject('favorites', '[]');
 
             favFac.addToFavorites = function(index) {
               for (var i = 0; i < favorites.length; i++) {
@@ -34,6 +32,7 @@ angular.module('conFusion.services', ['ngResource'])
                   return;
               }
               favorites.push({id: index});
+              $localStorage.storeObject('favorites', favorites);
             };
 
             favFac.deleteFromFavorites = function(index) {
@@ -42,15 +41,16 @@ angular.module('conFusion.services', ['ngResource'])
                   favorites.splice(i, 1);
                 }
               }
+              $localStorage.storeObject('favorites', favorites);
             };
 
             favFac.getFavorites = function() {
               return favorites;
             };
 
-
             return favFac;
         }])
+
         .factory('$localStorage', ['$window', function($window) {
           return {
             store: function(key, value) {
@@ -66,5 +66,4 @@ angular.module('conFusion.services', ['ngResource'])
               return JSON.parse($window.localStorage[key] || defaultValue);
             }
           }
-        }])
-;
+        }]);
